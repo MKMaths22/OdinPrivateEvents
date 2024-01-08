@@ -1,0 +1,17 @@
+<% if  @user.events.size.positive? %>
+  Here are the Events created by 
+  <%= @user[:name] %> :
+  <br>
+  <%= @user.events.each do |event| %>
+    Event
+    <%= event.id %>
+    <br>
+    Takes place at
+    <%= event.location %>
+    At 
+    <%= event.date %>
+  <% end %>
+<% else %>
+  <%= @user[:name] %>
+  currently has no created Events.
+<% end %>

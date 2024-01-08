@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'users/show'
-  get 'user/show'
+  get 'users/:id/show', to: 'users#show'
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
