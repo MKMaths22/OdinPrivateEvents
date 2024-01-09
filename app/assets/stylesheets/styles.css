@@ -7,7 +7,24 @@ body {
   margin: 10px;
 }
 
-div[class="field_with_error"] {
+div.field_with_error {
   background-color: red;
   height: 20px;
+}
+
+div.links_bar {
+  width: 100vw;
+  height: 70px;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  align-items: center;
+}
+
+div.links_bar > a {
+  padding: 10px;
+  background-color: white;
+  font-size: 30px;
+  border: 2px solid black;
 }
