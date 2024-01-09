@@ -1,16 +1,9 @@
 <% if  @user.events.size.positive? %>
   Here are the Events created by 
-  <%= @user[:name] %> :
+  <%= @user[:name] %>:
   <br>
-  <%= @user.events.each do |event| %>
-    Event
-    <%= event.id %>
-    <br>
-    Takes place at
-    <%= event.location %>
-    At 
-    <%= event.date %>
-  <% end %>
+  <br>
+  <%= render partial: '/display_events', locals: {events_to_display: @user.events} %>
 <% else %>
   <%= @user[:name] %>
   currently has no created Events.
