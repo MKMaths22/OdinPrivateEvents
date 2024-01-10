@@ -11,8 +11,10 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(allowed_event_params)
-    @event[:creator_id] = current_user[:id]
+    # @event = Event.new(allowed_event_params)
+    # @event[:creator_id] = current_user[:id]
+
+    @event = current_user.events.build(attributes = allowed_event_params)
 
     if @event.save
       redirect_to root_path
