@@ -27,3 +27,7 @@ div.links_bar > a {
   font-size: 30px;
   border: 2px solid black;
 }
+
+div.signed_in {
+  font-size: 25px;
+}
