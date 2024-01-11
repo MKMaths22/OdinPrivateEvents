@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find(params[:id])
   end
 
   def new
@@ -17,7 +18,7 @@ class EventsController < ApplicationController
     @event = current_user.events.build(attributes = allowed_event_params)
 
     if @event.save
-      redirect_to root_path
+      redirect_to event_path(id: @event.id)
     else
       flash.now[:alert] = @event.errors.full_messages
       render 'new', status: :unprocessable_entity
