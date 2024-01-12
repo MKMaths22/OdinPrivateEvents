@@ -4,7 +4,13 @@
   <br>
   Takes place at
   <%= event.location %>
+  <br>
   At 
   <%= event.date %>
+  <br>
+  <% if current_user %>
+    <%= link_to "Attend this Event", bookings_path %>
+  <% end %>
+  <br>
   <br>
 <% end %>
