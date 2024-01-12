@@ -1,1 +1,9 @@
 <%= render partial: '/display_events', locals: {events_to_display: [@event], link_single_events: false } %>
+<% if @event.attendees.size.positive? %>
+  <% @event.attendees.each do |user| %>
+  Attended by 
+  <%= user.name %>
+  <% end %>
+<% else %>
+  This event has no Attendees.
+<% end %>
