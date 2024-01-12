@@ -8,6 +8,9 @@
   At 
   <%= event.date %>
   <br>
+  <% if link_single_events %>
+    <%= link_to "More info on this Event", event_path(id: event.id) %>
+  <% end %>
   <% if current_user %>
     <%= link_to "Attend this Event", bookings_path(event_id: event.id), data: { 'turbo-method' => :post } %>
   <% end %>
