@@ -14,7 +14,14 @@
   <%= @user[:name] %>:
   <br>
   <br>
-  <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events, link_single_events: true } %>
+  Events in the past:
+  <br>
+  <br>
+  <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.where(date: ..(Time.now)), link_single_events: true } %>
+  Events in the future:
+  <br>
+  <br>
+  <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.where(date: (Time.now)..), link_single_events: true } %>
 <% else %>
   <%= @user[:name] %>
   currently has no attended Events.

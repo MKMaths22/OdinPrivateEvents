@@ -1,6 +1,9 @@
+<% if events_to_display.size.zero? %> 
+  There are no Events to display.
+<% end %>
 <% events_to_display.each do |event| %>
-  Event
-  <%= event.id %>
+    Event
+    <%= event.id %>
   <br>
   Takes place at
   <%= event.location %>
