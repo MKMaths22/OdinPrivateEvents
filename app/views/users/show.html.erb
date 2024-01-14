@@ -16,7 +16,7 @@
   <br>
   <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events, link_single_events: true } %>
 <% else %>
-<%= @user[:name] %>
-currently has no attended Events.
+  <%= @user[:name] %>
+  currently has no attended Events.
 <% end %>
   
