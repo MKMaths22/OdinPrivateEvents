@@ -1,3 +1,11 @@
 <h2>All Events Listed Here!</h2>
 <br>
-<%= render partial: '/display_events', locals: {events_to_display: @events, link_single_events: true } %>
+<br>
+<h3>Events in the Past:</h3>
+<br>
+<%= render partial: '/display_events', locals: {events_to_display: @events.past, link_single_events: true } %>
+<br>
+<br>
+<h3>Events in the Future:</h3>
+<br>
+<%= render partial: '/display_events', locals: {events_to_display: @events.future, link_single_events: true } %>

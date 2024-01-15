@@ -5,4 +5,15 @@ class Event < ApplicationRecord
   has_many :bookings, foreign_key: 'attended_event_id', dependent: :destroy
   has_many :attendees, :through => :bookings
   default_scope {order('date')}
+
+  scope :past, -> { where(date: ..(Time.now))}
+  scope :future, -> { where(date: (Time.now)..)}
+  
+  # def self.past 
+  #  where(date: ..(Time.now))
+  # end
+
+  # def self.future
+  #  where(date: (Time.now)..)
+  # end
 end
