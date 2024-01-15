@@ -1,7 +1,6 @@
 <% if  @user.events.size.positive? %>
-  Here are the Events created by 
-  <%= @user[:name] %>:
-  <br>
+  <h3>Here are the Events created by 
+  <%= @user[:name] %>:</h3>
   <br>
   <%= render partial: '/display_events', locals: {events_to_display: @user.events, link_single_events: true } %>
 <% else %>
@@ -10,18 +9,19 @@
 <% end %>
 
 <% if @user.attended_events.size.positive? %>
-  These are the Events attended by
-  <%= @user[:name] %>:
-  <br>
+  <h3>These are the Events attended by
+  <%= @user[:name] %>:</h3>
   <br>
   Events in the past:
   <br>
   <br>
-  <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.where(date: ..(Time.now)), link_single_events: true } %>
+  <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.past, link_single_events: true } %>
+  <br>
+  <br>
   Events in the future:
   <br>
   <br>
-  <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.where(date: (Time.now)..), link_single_events: true } %>
+  <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.future, link_single_events: true } %>
 <% else %>
   <%= @user[:name] %>
   currently has no attended Events.

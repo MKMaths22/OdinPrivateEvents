@@ -19,7 +19,7 @@
       You are booked to Attend this Event
       <%= link_to "Delete Booking", booking_path(id: Booking.where(attended_event_id: event.id, attendee_id: current_user.id)[0].id), data: { 'turbo-method' => :delete } %>
       <% else %>
-      <%= link_to "Attend this Event", bookings_path(event_id: event.id), data: { 'turbo-method' => :post } %>
+        <%= link_to "Attend this Event", bookings_path(event_id: event.id), data: { 'turbo-method' => :post } %>
     <% end %>
   <% end %>
   <br>
