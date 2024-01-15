@@ -4,8 +4,10 @@
   <br>
   <%= render partial: '/display_events', locals: {events_to_display: @user.events, link_single_events: true } %>
 <% else %>
+  <h3>
   <%= @user[:name] %>
   currently has no created Events.
+  </h3>
 <% end %>
 
 <% if @user.attended_events.size.positive? %>
@@ -23,7 +25,9 @@
   <br>
   <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.future, link_single_events: true } %>
 <% else %>
+  <h3>
   <%= @user[:name] %>
   currently has no attended Events.
+  </h3>
 <% end %>
   
