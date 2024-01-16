@@ -31,8 +31,12 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @event = current_user.events.update(attributes = allowed_event_params)
-    redirect_to user_path(id: current_user.id)
+    if @event.update!(attributes = allowed_event_params)
+      redirect_to event_path(id: @event.id)
+    else
+      flash[:alert] = @event.errors.full_messages
+      redirect_to event_path(id: @event.id)
+    end
   end
 
   def destroy

@@ -1,14 +1,4 @@
 Let's make a new Event!
 <br>
 <br>
-<%= form_with model: @event do |f| %>
-  <%= f.label :location, "Location Of Event" %>
-  <%= f.text_field :location %>
-  <br>
-  <br>
-  <%= f.label :date, "Date" %>
-  <%= f.date_field :date %>
-  <br>
-  <br>
-  <%= f.submit "Submit" %>
-<% end %>
+<%= render partial: 'event_form' %>
