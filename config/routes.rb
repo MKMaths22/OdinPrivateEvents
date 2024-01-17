@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :update, :show]
   resources :events
   resources :bookings, only: [:create, :destroy]
+  resources :invitations, only: [:create]
   root 'events#index'
   get "up" => "rails/health#show", as: :rails_health_check
 
