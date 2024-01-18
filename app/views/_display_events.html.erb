@@ -7,6 +7,8 @@
     <% else %>
       <% future = false %>
     <% end %>
+    <br>
+    <br>
     Event
     <%= event.id %>
   <br>
@@ -23,19 +25,20 @@
     <%= link_to "More info on this Event", event_path(id: event.id) %>
   <% end %>
   <% if current_user %>
-    <% if current_user.attended_events.include?(event) %>
-      <% if future %>
-        You are booked to Attend this Event
+    <% if current_user.invited_events.include?(event) %>
+      <% invite = Invitation.find(invited_event_id: event.id, invitee_id: current_user.id) %>
+      <% if invite.declined %>
+        You have declined your invitation to this Event.
       <% else %>
-        You have attended this Event
-      <% end %>
-      <%= link_to "Delete Booking", booking_path(id: Booking.where(attended_event_id: event.id, attendee_id: current_user.id)[0].id), data: { 'turbo-method' => :delete } %>
-      <% else %>
-        <% if Event.all.future.include?(event) %>
-          <%= link_to "Attend this Event", bookings_path(event_id: event.id), data: { 'turbo-method' => :post } %>
+        You were invited to this Event.
+        <% if future == true %>
+          You have been invited to this Event.
+          <%= link_to "Accept Invitation", bookings_path(event_id: event.id), data: { 'turbo-method' => :post } %>
+          <%= link_to "Decline Invitation", invitation_path(id: [invite.invited_event_id, invite.invitee_id]), data: { 'turbo-method' => :patch } %>
+        <% else %>
+          You have attended this Event.
         <% end %>
+      <% end %>
     <% end %>
   <% end %>
-  <br>
-  <br>
 <% end %>
