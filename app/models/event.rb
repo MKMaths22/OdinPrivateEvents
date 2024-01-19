@@ -6,6 +6,7 @@ class Event < ApplicationRecord
   has_many :attendees, :through => :bookings
   has_many :invitations, foreign_key: 'invited_event_id', dependent: :destroy
   has_many :invitees, :through => :invitations
+  has_many :declined_invitees, ->{ where(invitations: { declined:true}) },:through => :invitations, source: :invitee
   default_scope {order('date')}
 
   scope :past, -> { where(date: ..(Time.now))}

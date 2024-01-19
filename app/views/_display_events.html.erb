@@ -26,7 +26,7 @@
   <% end %>
   <% if current_user %>
     <% if current_user.invited_events.include?(event) %>
-      <% invite = Invitation.find(invited_event_id: event.id, invitee_id: current_user.id) %>
+      <% invite = Invitation.where(invited_event: event, invitee: current_user) %>
       <% if invite.declined %>
         You have declined your invitation to this Event.
       <% else %>

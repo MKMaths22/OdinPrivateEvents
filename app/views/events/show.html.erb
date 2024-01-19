@@ -14,7 +14,14 @@
   <%= link_to "Edit This Event", edit_event_path(id: @event.id) %>
   <%= link_to "Cancel This Event", event_path(id: @event.id), data: { turbo_method: :delete } %>
   <% noninvited_users = User.all - @event.invitees %>
-  LINKS TO INVITE ALL OF THOSE USERS
-  <% declined_invitations = @event.invitations.declined %>
-  <% declined_users = declined_invitations.invitees %>
+  <br>
+  <% noninvited_users.each do |user| %>
+    <%= link_to "Invite #{user.name}", invitations_path(invitation: Invitation.new(), invitee_id: user.id, invited_event_id: @event.id), data: { turbo_method: :post } %>
+    <br>
+  <% end %>
+  <% declined_users = @event.declined_invitees %>
+    <% declined_users.each do |user| %>
+      <%= user.name %>
+      is a declined user.
+    <% end %>
 <% end %>
