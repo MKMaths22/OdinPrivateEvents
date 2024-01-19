@@ -10,8 +10,11 @@
 <% else %>
   This event has no Attendees.
 <% end %>
-<% if current_user.id == @event.creator_id %>
+<% if current_user == @event.creator %>
   <%= link_to "Edit This Event", edit_event_path(id: @event.id) %>
   <%= link_to "Cancel This Event", event_path(id: @event.id), data: { turbo_method: :delete } %>
-  <% nonconfirmed_users = User.all - @event.attendees %>
+  <% noninvited_users = User.all - @event.invitees %>
+  LINKS TO INVITE ALL OF THOSE USERS
+  <% declined_invitations = @event.invitations.declined %>
+  <% declined_users = declined_invitations.invitees %>
 <% end %>
