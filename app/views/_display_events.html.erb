@@ -30,12 +30,20 @@
       <% if invite.declined %>
         You have declined your invitation to this Event.
       <% else %>
-        <% if future == true %>
+        <% if future == false %> 
+          <% if event.attendees.include?(current_user) %>
+            You have attended this Event.
+          <% else %>
+          Your invitation for this Event expired. Please try to Accept/Decline promptly.
+          <% end %>
+        <% else %>
+          <% if event.attendees.include?(current_user) %>
+            You are booked to attend this Event.
+          <% else %>
           You have been invited to this Event.
           <%= link_to "Accept Invitation", bookings_path(event_id: event.id), data: { 'turbo-method' => :post } %>
           <%= link_to "Decline Invitation", invitation_path(id: invite.id), data: { 'turbo-method' => :patch } %>
-        <% else %>
-          You have attended this Event.
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

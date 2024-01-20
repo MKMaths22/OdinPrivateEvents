@@ -11,8 +11,8 @@ class InvitationsController < ApplicationController
 
   def update
     @invitation = Invitation.find(params[:id])
-    @invitation = @invitation.update(:declined => true)
-    redirect_to event_path(id: params[:invited_event_id])
+    @invitation.update(:declined => true)
+    redirect_to event_path(id: @invitation.invited_event_id)
   end
 
   private

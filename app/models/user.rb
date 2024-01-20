@@ -8,5 +8,6 @@ class User < ApplicationRecord
   has_many :attended_events, :through => :bookings, dependent: :destroy
   has_many :invitations, foreign_key: "invitee_id", dependent: :destroy
   has_many :invited_events, :through => :invitations, dependent: :destroy
+  has_many :declined_events, ->{ where(invitations: { declined:true}) },:through => :invitations, source: :invited_event
   validates :name, presence: true
 end
