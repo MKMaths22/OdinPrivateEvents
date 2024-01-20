@@ -13,10 +13,15 @@
 <% end %>
 <br>
 <% if current_user == @event.creator %>
+  <br>
+  You created this Event.
+  <br>
   <%= link_to "Edit This Event", edit_event_path(id: @event.id) %>
   <%= link_to "Cancel This Event", event_path(id: @event.id), data: { turbo_method: :delete } %>
   <% noninvited_users = User.all - @event.invitees %>
   <br>
+  <br>
+  <h3> Manage Invitations: </h3>
   <% noninvited_users.each do |user| %>
     <%= link_to "Invite #{user.name}", invitations_path(invitee_id: user.id, invited_event_id: @event.id), data: { turbo_method: :post } %>
     <br>
