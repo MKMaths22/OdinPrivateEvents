@@ -1,4 +1,5 @@
 <%= render partial: '/display_events', locals: {events_to_display: [@event], link_single_events: false } %>
+<br>
 <% if @event.attendees.size.positive? %>
   Attended by
   <% names_string = '' %>
@@ -10,18 +11,52 @@
 <% else %>
   This event has no Attendees.
 <% end %>
+<br>
 <% if current_user == @event.creator %>
   <%= link_to "Edit This Event", edit_event_path(id: @event.id) %>
   <%= link_to "Cancel This Event", event_path(id: @event.id), data: { turbo_method: :delete } %>
   <% noninvited_users = User.all - @event.invitees %>
   <br>
   <% noninvited_users.each do |user| %>
-    <%= link_to "Invite #{user.name}", invitations_path(invitation: Invitation.new(), invitee_id: user.id, invited_event_id: @event.id), data: { turbo_method: :post } %>
+    <%= link_to "Invite #{user.name}", invitations_path(invitee_id: user.id, invited_event_id: @event.id), data: { turbo_method: :post } %>
     <br>
   <% end %>
   <% declined_users = @event.declined_invitees %>
-    <% declined_users.each do |user| %>
-      <%= user.name %>
-      is a declined user.
+  <% if declined_users.size.positive? %>
+    <% if declined_users.size == 1 %>
+      <% first_word = 'Invitation' %>
+      <% else %>
+      <% first_word = 'Invitations' %>
     <% end %>
+    <%= first_word %> 
+    declined by
+    <% names_string = '' %>
+    <% declined_users.each do |user| %>
+      <% names_string << user.name << ', ' %>
+    <% end %>
+  <% string = names_string[0..-3] << '.' %>
+  <%= string %>
+  <% else %>
+    There are currently no declined invitations.
+  <% end %>
+  <br>
+<% pending_users = @event.invitees - declined_users %>
+  <% if pending_users.size.positive? %>
+    <% if pending_users.size == 1 %>
+      <% first_string = 'There is a pending invitation to' %>
+    <% else %>
+      <% first_string = 'There are pending invitations to' %>
+    <% end %>
+  <%= first_string %>
+  <% names_string = '' %>
+  <% pending_users.each do |user| %>
+    <% names_string << user.name << ', ' %>
+  <% end %>
+  <% string = names_string[0..-3] << '.' %>
+  <%= string %>
+  <% else %>
+    There are currently no pending invitations.
+  <% end %>
+
+
 <% end %>
