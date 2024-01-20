@@ -26,15 +26,14 @@
   <% end %>
   <% if current_user %>
     <% if current_user.invited_events.include?(event) %>
-      <% invite = Invitation.where(invited_event: event, invitee: current_user) %>
+      <% invite = Invitation.where(invited_event: event, invitee: current_user).first %>
       <% if invite.declined %>
         You have declined your invitation to this Event.
       <% else %>
-        You were invited to this Event.
         <% if future == true %>
           You have been invited to this Event.
           <%= link_to "Accept Invitation", bookings_path(event_id: event.id), data: { 'turbo-method' => :post } %>
-          <%= link_to "Decline Invitation", invitation_path(id: [invite.invited_event_id, invite.invitee_id]), data: { 'turbo-method' => :patch } %>
+          <%= link_to "Decline Invitation", invitation_path(id: invite.id), data: { 'turbo-method' => :patch } %>
         <% else %>
           You have attended this Event.
         <% end %>
