@@ -9,19 +9,18 @@
   currently has no created Events.
   </h3>
 <% end %>
-
+<br>
+<br>
 <% if @user.attended_events.size.positive? %>
   <h3>These are the Events attended by
   <%= @user[:name] %>:</h3>
   <br>
   Events in the past:
   <br>
-  <br>
   <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.past, link_single_events: true } %>
   <br>
   <br>
   Events in the future:
-  <br>
   <br>
   <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.future, link_single_events: true } %>
 <% else %>
