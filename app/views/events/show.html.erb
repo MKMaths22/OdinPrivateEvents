@@ -16,52 +16,52 @@
   <br>
   You created this Event.
   <br>
-  <%= link_to "Edit This Event", edit_event_path(id: @event.id) %>
-  <%= link_to "Cancel This Event", event_path(id: @event.id), data: { turbo_method: :delete } %>
-  <% noninvited_users = User.all - @event.invitees %>
-  <br>
-  <br>
-  <h3> Manage Invitations: </h3>
-  <% noninvited_users.each do |user| %>
-    <%= link_to "Invite #{user.name}", invitations_path(invitee_id: user.id, invited_event_id: @event.id), data: { turbo_method: :post } %>
+  <% if Event.all.future.include?(@event) %>
+    <%= link_to "Edit This Event", edit_event_path(id: @event.id) %>
+    <%= link_to "Cancel This Event", event_path(id: @event.id), data: { turbo_method: :delete } %>
+    <% noninvited_users = User.all - @event.invitees %>
     <br>
-  <% end %>
-  <% declined_users = @event.declined_invitees %>
-  <% if declined_users.size.positive? %>
-    <% if declined_users.size == 1 %>
-      <% first_word = 'Invitation' %>
-      <% else %>
-      <% first_word = 'Invitations' %>
+    <br>
+    <h3> Manage Invitations: </h3>
+    <% noninvited_users.each do |user| %>
+      <%= link_to "Invite #{user.name}", invitations_path(invitee_id: user.id, invited_event_id: @event.id), data: { turbo_method: :post } %>
+    <br>
     <% end %>
-    <%= first_word %> 
-    declined by
+    <% declined_users = @event.declined_invitees %>
+    <% if declined_users.size.positive? %>
+      <% if declined_users.size == 1 %>
+        <% first_word = 'Invitation' %>
+        <% else %>
+        <% first_word = 'Invitations' %>
+      <% end %>
+      <%= first_word %> 
+      declined by
+      <% names_string = '' %>
+      <% declined_users.each do |user| %>
+        <% names_string << user.name << ', ' %>
+      <% end %>
+    <% string = names_string[0..-3] << '.' %>
+    <%= string %>
+    <% else %>
+      There are currently no declined invitations.
+    <% end %>
+    <br>
+  <% pending_users = @event.invitees - declined_users %>
+    <% if pending_users.size.positive? %>
+      <% if pending_users.size == 1 %>
+        <% first_string = 'There is a pending invitation to' %>
+      <% else %>
+        <% first_string = 'There are pending invitations to' %>
+      <% end %>
+    <%= first_string %>
     <% names_string = '' %>
-    <% declined_users.each do |user| %>
+    <% pending_users.each do |user| %>
       <% names_string << user.name << ', ' %>
     <% end %>
-  <% string = names_string[0..-3] << '.' %>
-  <%= string %>
-  <% else %>
-    There are currently no declined invitations.
-  <% end %>
-  <br>
-<% pending_users = @event.invitees - declined_users %>
-  <% if pending_users.size.positive? %>
-    <% if pending_users.size == 1 %>
-      <% first_string = 'There is a pending invitation to' %>
+    <% string = names_string[0..-3] << '.' %>
+    <%= string %>
     <% else %>
-      <% first_string = 'There are pending invitations to' %>
+      There are currently no pending invitations.
     <% end %>
-  <%= first_string %>
-  <% names_string = '' %>
-  <% pending_users.each do |user| %>
-    <% names_string << user.name << ', ' %>
   <% end %>
-  <% string = names_string[0..-3] << '.' %>
-  <%= string %>
-  <% else %>
-    There are currently no pending invitations.
-  <% end %>
-
-
 <% end %>
