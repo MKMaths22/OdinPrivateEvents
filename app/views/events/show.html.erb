@@ -46,7 +46,7 @@
       There are currently no declined invitations.
     <% end %>
     <br>
-  <% pending_users = @event.invitees - declined_users %>
+  <% pending_users = @event.invitees - declined_users - @event.attendees %>
     <% if pending_users.size.positive? %>
       <% if pending_users.size == 1 %>
         <% first_string = 'There is a pending invitation to' %>

@@ -17,7 +17,7 @@
   <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.past, link_single_events: true } %>
   <br>
   <br>
-  Booked Events in the future:
+  <h3>Booked Events in the future:</h3>
   <%= render partial: '/display_events', locals: {events_to_display: @user.attended_events.future, link_single_events: true } %>
 <% else %>
   <h3>
