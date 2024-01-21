@@ -1,4 +1,15 @@
 class BookingsController < ApplicationController
+  
+  before_action :authenticate_invitation, only: [:create]
+
+  def authenticate_invitation
+    @event = Event.find(params[:event_id])
+    unless current_user && current_user.invited_events.include?(@event)
+      flash[:alert] = "You must be logged in and invited to attend an Event."
+      redirect_to new_user_session_path
+    end
+  end
+  
   def create
     @booking = Booking.new
     @booking.attended_event_id = params[:event_id]
