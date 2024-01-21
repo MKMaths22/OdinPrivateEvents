@@ -1,4 +1,22 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :create]
+  before_action :authenticate_creator, only: [:edit, :update, :destroy]
+
+  def authenticate_user
+    unless current_user
+    flash[:alert] = 'You must be logged in to create an Event.'
+    redirect_to new_user_session_path
+    end
+  end
+
+  def authenticate_creator
+    event = Event.find(params[:id])
+    unless current_user == event.creator
+      flash[:alert] = 'You must be logged in as the creator of the Event to perform this action.'
+      redirect_to new_user_session_path
+    end
+  end
+
   def index
     @events = Event.all
   end
@@ -14,7 +32,7 @@ class EventsController < ApplicationController
   def create
     # @event = Event.new(allowed_event_params)
     # @event[:creator_id] = current_user[:id]
-
+    
     @event = current_user.events.build(attributes = allowed_event_params)
 
     if @event.save
