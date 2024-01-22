@@ -23,6 +23,7 @@
     <br>
     <br>
     <h3> Manage Invitations: </h3>
+    <br>
     <% noninvited_users.each do |user| %>
       <%= link_to "Invite #{user.name}", invitations_path(invitee_id: user.id, invited_event_id: @event.id), data: { turbo_method: :post } %>
     <br>

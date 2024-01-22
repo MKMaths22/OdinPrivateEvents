@@ -12,9 +12,8 @@ class InvitationsController < ApplicationController
   end
 
   def authenticate_invitee
-    event = Event.find(params[:invited_event_id])
-    invitee = User.find(params[:invitee_id])
-    unless current_user && event.invitees.include?(current_user)
+    invite = Invitation.find(params[:id])
+    unless current_user && current_user == invite.invitee
       flash[:alert] = 'You must be logged in and invited to this Event to decline an Invitation.'
       redirect_to new_user_session_path
     end
