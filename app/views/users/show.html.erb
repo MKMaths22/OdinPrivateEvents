@@ -27,7 +27,7 @@
 <% end %>
 <br>
 <br>
-<% pending_events = current_user.invited_events.future - current_user.declined_events %>
+<% pending_events = current_user.invited_events.future - current_user.declined_events - current_user.attended_events %>
 <% if pending_events.size.positive? %>
   <h3>Here are the future Events with pending invitations for
   <%= @user[:name] %>:</h3>
