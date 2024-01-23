@@ -46,11 +46,9 @@ Event attendance:
 
 Finishing touches:  
 
-
 1)  Separate the past and upcoming events on the Event’s Index page by creating two class methods on the Event model (e.g. Event.past).  
 2)  Refactor the past and upcoming class methods into scopes.  
 3)  Put navigation links across the top to help you jump around.  
-
 4)  Extra Credit: Allow users to edit and delete the events they created.  
 5)  Extra Credit: Allow users to remove themselves as an attendee to their “attended_events”.  
 6)  Extra Credit: Make each event private and add the functionality for the event creator to invite specific users to an event.  
@@ -65,7 +63,9 @@ Author notes by Peter Hawes:
 
 -------------------------------------
 
-I decided to implement all of the extra credit suggestions at the end of the project instructions. 
+I decided to implement all of the extra credit suggestions at the end of the project instructions --- except that implementing 5 AND 6 would have meant having users accept/decline invitations and then cancel bookings after all, which was becoming an unwieldy user interface IMHO, so I undid the cancelling of attendance when I implemented feature 6), creating a new Invitations table. 
+
+Rails is still sometimes hard for me to debug/understand, but it is getting less painful each time. The vast majority of problems were solved without help, thanks to "moosecowbear" on Discord who assisted me a few times --- especially with the way extra associations were needed to access declined_invitees for an Event. I adapted this idea to define declined_events for a User.
 
 Things you may want to cover:
 
