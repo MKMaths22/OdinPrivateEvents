@@ -7,7 +7,8 @@ Project Instructions:
 In these projects, you’ll finally really get to dive into ActiveRecord’s associations, one of the best features it offers.  
 
 
-Project: Private events
+**Project: Private events**  
+
 You want to build a site similar to a private Eventbrite which allows users to create events and then manage user signups.  
 
 A user can create events. A user can attend many events. An event can be attended by many users. Events take place at a specific date and at a location (which you can just store as a string, like “Andy’s House”).  
@@ -17,13 +18,13 @@ This project will require you to model many-to-many relationships and also to be
 Your task:  
 We’ve gotten quite far here, so these tasks will only lay out the high level overview of what you’re meant to build. You’ll need to implement the details yourself. As usual, it’s not meant to look pretty, just work. Design is all extra credit.  
 
-Setup:  
+**Setup:**  
 
 1) Think about and spec out how to set up your data models for this application.  
 2) Create a new private-events Rails app and GitHub repo.  
 3) Update your README to be descriptive and link to this project.    
 
-Events and users:  
+**Events and users:**  
 
 1)  Build and migrate your Event model without any foreign keys or validations. Include the event’s date in your model but don’t worry about doing anything special with it yet.  
 2)  Create the EventsController and add an #index action that will display all of the events. Create a corresponding view and add a heading with your choice of wording.  
@@ -34,7 +35,7 @@ Events and users:
 7)  Make the form for creating an event.
 8)  Have the Event’s Show page display the details of the event.  
 
-Event attendance:  
+**Event attendance:** 
 
 1)  Add the association between the event attendee (also a User) and the event. Call this user the “attendee”. Call the event the “attended_event”. You’ll again need to juggle specially named foreign keys and classes and sources.  
 2)  Create and migrate all necessary tables and foreign keys. This will require a “through” table since an Event can have many Attendees and a single User (Attendee) can attend many Events… many-to-many.  
@@ -44,7 +45,7 @@ Event attendance:
 6)  Separate this list of “attended_events” into either events that have occurred in the past or events that will occur in the future. You’ll get some good practice building queries and working with dates. Keep this logic in the view and do not put separate method calls in the controller.  
 
 
-Finishing touches:  
+**Finishing touches:**  
 
 1)  Separate the past and upcoming events on the Event’s Index page by creating two class methods on the Event model (e.g. Event.past).  
 2)  Refactor the past and upcoming class methods into scopes.  
