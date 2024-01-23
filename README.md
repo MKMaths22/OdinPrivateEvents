@@ -60,30 +60,10 @@ The project uses Ruby version 3.1.2p20 and Devise gem version 4.9.3
 
 -------------------------------------  
 
-Author notes by Peter Hawes: 
+**Author notes by Peter Hawes:**  
 
 -------------------------------------
 
 I decided to implement all of the extra credit suggestions at the end of the project instructions --- except that implementing 5 AND 6 would have meant having users accept/decline invitations and then cancel bookings after all, which was becoming an unwieldy user interface IMHO, so I undid the cancelling of attendance when I implemented feature 6), creating a new Invitations table. 
 
 Rails is still sometimes hard for me to debug/understand, but it is getting less painful each time. The vast majority of problems were solved without help, thanks to "moosecowbear" on Discord who assisted me a few times --- especially with the way extra associations were needed to access declined_invitees for an Event. I adapted this idea to define declined_events for a User.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
