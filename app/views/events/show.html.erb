@@ -11,6 +11,11 @@
 <% else %>
   This event has no Attendees.
 <% end %>
+  <% if current_user && !@event.invitees.include?(current_user) %>
+    <br>
+    You are currently not invited to this Event.
+    <br>
+  <% end %>
 <br>
 <% if current_user == @event.creator %>
   <br>
